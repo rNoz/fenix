@@ -11,3 +11,24 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+
+  build_vim3_mainline_kernel_images:
+    name: Build VIM3 Mainline Kernel Images
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      # Fetch Dependencies
+      - name: Install Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y make lsb-release qemu-user-static zip
+      # Get current date
+      - name: Get Current Date
+        id: date
+        run: echo "::set-output name=date::$(date +%F | sed 's/-//g')"
+
+      # Build
+      - name: Build Image
+        run: |
+          .github/workflows/build.sh mainline VIM3 Ubuntu
