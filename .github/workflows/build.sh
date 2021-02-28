@@ -5,6 +5,9 @@ touch .ignore-update
 LINUX=$1
 BOARD=$2
 DISTRIBUTION=$3
+FORCE_INST_TYPE=$4
+
+
 
 CONFIG=.github/workflows/configs/config-${DISTRIBUTION,,}-github-actions.conf
 
@@ -45,6 +48,10 @@ fi
 sed -i 's/LINUX=.*/LINUX=${LINUX_VER}/g' $CONFIG
 sed -i 's/UBOOT=.*/UBOOT=${UBOOT_VER}/g' $CONFIG
 sed -i 's/KHADAS_BOARD=.*/KHADAS_BOARD=${BOARD}/g' $CONFIG
+
+if [[ "$FORCE_INST_TYPE" == "EMMC" ]]; then
+  INSTALL_TYPES=(EMMC)
+fi
 
 for install_type in $INSTALL_TYPES
 do
