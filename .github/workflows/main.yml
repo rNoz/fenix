@@ -32,3 +32,55 @@ jobs:
       - name: Build Image
         run: |
           .github/workflows/build.sh mainline VIM3 Ubuntu
+          
+      # Upload Images to GitHub Actions Artifacts
+      - name: 'Upload VIM3 Ubuntu Server Mainline Kernel Images'
+        uses: actions/upload-artifact@v2
+        with:
+          name: VIM3-Ubuntu-Server-Mainline-Kernel-Firmware-${{ steps.date.outputs.date }}
+          path: |
+            ${{ github.workspace }}/build/images/VIM*-server-*.xz
+            
+      - name: 'Upload VIM3 Ubuntu Desktop Mainline Kernel Images'
+        uses: actions/upload-artifact@v2
+        with:
+          name: VIM3-Ubuntu-Desktop-Mainline-Kernel-Firmware-${{ steps.date.outputs.date }}
+          path: |
+            ${{ github.workspace }}/build/images/VIM*-gnome-*.xz          
+            
+
+  build_vim3_mainline_kernel_images_emmc:
+    name: Build VIM3 Mainline Kernel Images
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      # Fetch Dependencies
+      - name: Install Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y make lsb-release qemu-user-static zip
+      # Get current date
+      - name: Get Current Date
+        id: date
+        run: echo "::set-output name=date::$(date +%F | sed 's/-//g')"
+
+      # Build
+      - name: Build Image
+        run: |
+          .github/workflows/build.sh mainline VIM3 Ubuntu EMMC
+          
+      # Upload Images to GitHub Actions Artifacts
+      - name: 'Upload VIM3 Ubuntu Server Mainline Kernel Images'
+        uses: actions/upload-artifact@v2
+        with:
+          name: VIM3-Ubuntu-Server-Mainline-Kernel-Firmware-${{ steps.date.outputs.date }}
+          path: |
+            ${{ github.workspace }}/build/images/VIM*-server-*.xz
+            
+      - name: 'Upload VIM3 Ubuntu Desktop Mainline Kernel Images'
+        uses: actions/upload-artifact@v2
+        with:
+          name: VIM3-Ubuntu-Desktop-Mainline-Kernel-Firmware-${{ steps.date.outputs.date }}
+          path: |
+            ${{ github.workspace }}/build/images/VIM*-gnome-*.xz                     
