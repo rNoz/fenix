@@ -50,7 +50,7 @@ jobs:
             
 
   build_vim3_mainline_kernel_images_emmc:
-    name: Build VIM3 Mainline Kernel Images
+    name: Build VIM3 Mainline Kernel Images EMMC
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -71,16 +71,16 @@ jobs:
           .github/workflows/build.sh mainline VIM3 Ubuntu EMMC
           
       # Upload Images to GitHub Actions Artifacts
-      - name: 'Upload VIM3 Ubuntu Server Mainline Kernel Images'
+      - name: 'Upload VIM3 Ubuntu Server Mainline Kernel Images EMMC'
         uses: actions/upload-artifact@v2
         with:
-          name: VIM3-Ubuntu-Server-Mainline-Kernel-Firmware-${{ steps.date.outputs.date }}
+          name: VIM3-Ubuntu-Server-Mainline-Kernel-Firmware-EMMC-${{ steps.date.outputs.date }}
           path: |
             ${{ github.workspace }}/build/images/VIM*-server-*.xz
             
       - name: 'Upload VIM3 Ubuntu Desktop Mainline Kernel Images'
         uses: actions/upload-artifact@v2
         with:
-          name: VIM3-Ubuntu-Desktop-Mainline-Kernel-Firmware-${{ steps.date.outputs.date }}
+          name: VIM3-Ubuntu-Desktop-Mainline-Kernel-Firmware-EMMC-${{ steps.date.outputs.date }}
           path: |
             ${{ github.workspace }}/build/images/VIM*-gnome-*.xz                     
