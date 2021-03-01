@@ -71,6 +71,14 @@ jobs:
           .github/workflows/build.sh mainline VIM3 Ubuntu EMMC
           
       # Upload Images to GitHub Actions Artifacts
+      - name: 'Upload VIM3 Ubuntu Minimal Mainline Kernel Images EMMC'
+        uses: actions/upload-artifact@v2
+        with:
+          name: VIM3-Ubuntu-Minimal-Mainline-Kernel-Firmware-EMMC-${{ steps.date.outputs.date }}
+          path: |
+            ${{ github.workspace }}/build/images/VIM*-minimal-*.xz
+                  # Upload Images to GitHub Actions Artifacts
+                  
       - name: 'Upload VIM3 Ubuntu Server Mainline Kernel Images EMMC'
         uses: actions/upload-artifact@v2
         with:
