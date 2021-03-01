@@ -51,6 +51,7 @@ sed -i 's/KHADAS_BOARD=.*/KHADAS_BOARD=${BOARD}/g' $CONFIG
 
 if [[ "$FORCE_INST_TYPE" == "EMMC" ]]; then
   INSTALL_TYPES=(EMMC)
+  DISTRIB_TYPES=(minimal server gnome)
 fi
 
 for install_type in $INSTALL_TYPES
